@@ -13,22 +13,22 @@ using namespace std;
 class Civilizacion 
 {
     string nombre;
-    string ubiX;
-    string ubiY; 
+    float ubiX;
+    float ubiY; 
     int puntuacion;
     
 public:
     Civilizacion();
     Civilizacion(const string &nombre,
-                const string &ubiX,
-                const string &ubiY,
+                float ubiX,
+                float ubiY,
                 int puntuacion);
     void setNombre(const string &c);
     string getNombre();
-    void setubiX(const string &c);
-    string getubiX();
-    void setubiY(const string &c);
-    string getubiY();
+    void setubiX(float c);
+    float getubiX();
+    void setubiY(float c);
+    float getubiY();
     void setpuntuacion(int c);
     int getpuntuacion();
 
@@ -37,7 +37,7 @@ public:
         out << left ;
         out << setw(10) << c.nombre;
         out << setw(15) << c.ubiX ;
-        out << setw(15) <<  c.ubiY;
+        out << setw(15) << c.ubiY;
         out << setw(10) << c.puntuacion;
         out << endl;
 
@@ -50,8 +50,7 @@ public:
         getline(cin, c.nombre);
 
         cout << "Ubicacion X: ";
-        getline(cin, c.ubiX);
-
+        cin >> c.ubiX;
         cout << "Ubicacion Y: ";
         cin >> c.ubiY;
 

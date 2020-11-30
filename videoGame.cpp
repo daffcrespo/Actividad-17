@@ -7,7 +7,7 @@ VideoGame::VideoGame()
     size_t contador = 0;
 
 }
-VideoGame::VideoGame(const string &getNombreUsuario)
+VideoGame::VideoGame(const string &nombreUsuario)
 {
     this->nombreUsuario = nombreUsuario;
 }
@@ -28,6 +28,10 @@ void VideoGame::agregarCivilizacion(const Civilizacion &c)
 {
     civilizaciones.push_back(c);
 }
+void VideoGame::agregarUser(const string &nombreUsuario)
+{
+    usuarios.push_back(nombreUsuario);
+}
 
 
 void VideoGame::mostrar()
@@ -47,10 +51,14 @@ void VideoGame::mostrar()
     }
 }
 void VideoGame::mostrarUsuario(){
-    for(size_t i = 0; i < usuarios.size(); i++){
+    //VideoGame v;
+    ///cout << "Hola " << v.getNombreUsuario() << endl;
+    cout << endl;
+    for(size_t i = 0; i < 1; i++){
         VideoGame &v = usuarios[i];
-        cout << v;
+        cout << "Usuario: " << v;
     }
+    cout << endl;
 }
 
 
@@ -69,9 +77,9 @@ void VideoGame::inicializar(const Civilizacion &c, size_t n)
     civilizaciones = vector<Civilizacion>(n, c);
 }
 
-void VideoGame::eliminar(size_t pos)
+void VideoGame::eliminar(const string &v)
 {
-    civilizaciones.erase(civilizaciones.begin()+pos);
+    civilizaciones.erase(civilizaciones.begin());
 }
 
 void VideoGame::ordenarNombre()
@@ -108,6 +116,10 @@ Civilizacion VideoGame::back()
 bool VideoGame::empty()
 {
     return civilizaciones.empty();
+}
+bool VideoGame::emptyU()
+{
+    return usuarios.empty();
 }
 
 

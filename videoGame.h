@@ -18,21 +18,23 @@ private:
 
 public:
     VideoGame();
-    VideoGame(const string &getNombreUsuario);
+    VideoGame(const string &nombreUsuario);
     void agregarCivilizacion(const Civilizacion &c);
     void mostrar();
     void mostrarUsuario();
+    void agregarUser(const string &nombreUsuario);
     
     void setNombreUsuario(const string &v);
     string getNombreUsuario();
     Civilizacion front();
     Civilizacion back();
     bool empty();
+    bool emptyU();
 
     void insertar(const Civilizacion &c, size_t pos);
     size_t size();
     void inicializar(const Civilizacion &c, size_t n);
-    void eliminar(size_t pos);
+    void eliminar(const string &v);
     void ordenarNombre();
     void ordenarUbiX();
     void ordenarUbiY();
@@ -47,10 +49,14 @@ public:
 
         return v;
     }
+    friend VideoGame& operator<<(VideoGame &v, const string &nombreUsuario)
+    {
+        v.agregarUser(nombreUsuario);
+        return v;
+    }
 
     friend istream& operator>>(istream &in, VideoGame &v)
     {
-
         cout << "Nombre Usuario: ";
         getline(cin, v.nombreUsuario);
 
@@ -63,6 +69,25 @@ public:
         out << setw(10) << v.nombreUsuario;
         return out;
     }
+
+    bool operator==(const VideoGame& v)
+    {
+        return nombreUsuario == v.nombreUsuario;
+    }
+    bool operator==(const VideoGame& v) const
+    {
+        return nombreUsuario == v.nombreUsuario;
+    }
+
+    bool operator<(const VideoGame& v)
+    {
+        return 2;
+    }
+    bool operator<(const VideoGame& v) const
+    {
+        return nombreUsuario < v.nombreUsuario;
+    }
+
 };
 
 #endif

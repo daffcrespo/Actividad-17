@@ -6,9 +6,9 @@ Civilizacion::Civilizacion()
 }
 
 Civilizacion::Civilizacion(const string &nombre,
-              const string &ubiX,
-              const string &ubiY,
-              int puntuacion)
+                float ubiX,
+                float ubiY,
+                int puntuacion)
 {
     this->nombre = nombre;
     this->ubiX = ubiX;
@@ -26,22 +26,22 @@ string Civilizacion::getNombre()
     return nombre;
 }
 
-void Civilizacion::setubiX(const string &v)
+void Civilizacion::setubiX(float v)
 {
     ubiX = v;
 }
 
-string Civilizacion::getubiX()
+float Civilizacion::getubiX()
 {
     return ubiX;
 }
 
-void Civilizacion::setubiY(const string &v)
+void Civilizacion::setubiY(float v)
 {
     ubiY = v;
 }
 
-string Civilizacion::getubiY()
+float Civilizacion::getubiY()
 {
     return ubiY;
 }

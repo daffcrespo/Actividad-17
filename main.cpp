@@ -10,7 +10,8 @@ using namespace std;
 
 int main() {
     VideoGame v;
-    vector<Civilizacion> civilizaciones;
+    //vector<Civilizacion> civilizaciones;
+    //vector<VideoGame> usuarios;
     
     string op;
 
@@ -33,10 +34,15 @@ int main() {
 
 
         if(op == "1"){
-            VideoGame v;
-            cin>>v;
-            //v.setNombreUsuario();
+          
+            string nam;
+            cout << "Nombre del usuario: ";
+            getline(cin,nam);
+            v.agregarUser(nam);
 
+            cout << endl << endl << "El nombre del usuario es: "<< nam << endl;
+            cout << endl << "Presione entrar para continuar..." << endl;
+            cin.get();
         }
         else if (op == "2") {
             Civilizacion c;
@@ -44,7 +50,9 @@ int main() {
             cin >> c;
 
             v.agregarCivilizacion(c); 
-            cin.ignore();
+            cout << endl << "Presione entrar para continuar..." << endl;
+            cin.get();
+            cin.get();
         } 
         else if (op == "3") {
             Civilizacion c;
@@ -56,9 +64,13 @@ int main() {
 
             if (pos >= v.size()) {
                 cout << "Posición no válida" << endl;
+                cout << endl << "Presione entrar para continuar..." << endl;
+                cin.get();
             }
             else {
                 v.insertar(c, pos);
+                cout << endl << "Presione entrar para continuar..." << endl;
+                cin.get();
             }
         }
         else if (op == "4") {
@@ -79,6 +91,8 @@ int main() {
                 cout << "La primera civilizacion es: " << endl;
                 Civilizacion civi = v.front();
                 cout << civi << endl;
+                cout << endl << "Presione entrar para continuar..." << endl;
+                cin.get();
             }
         }
         else if(op == "6"){
@@ -88,13 +102,16 @@ int main() {
             else{
                 cout << "La ultima civilizacion es: " << endl;
                 cout << v.back() << endl;
+                cout << endl << "Presione entrar para continuar..." << endl;
+                cin.get();
             }
         }
         else if(op == "7"){
             int opcion;
-            cout << "Como deseas ordenar?" << endl;
+            cout << endl << "Como deseas ordenar?" << endl;
             cout<<"1)Nombre.\n2)Ubicacion X.\n3)Ubicacion Y.\n4)Puntuacion.\n";
             cin>>opcion;
+            cin.ignore();
             if(opcion == 1){
                 v.ordenarNombre();
             }
@@ -114,21 +131,23 @@ int main() {
         }
         
         else if (op == "8") {
-            size_t pos;
-            cout << "posición a eliminar: ";
-            cin >> pos; cin.ignore();
-
-            if (pos >= v.size()) {
-                cout << "Posición no válida" << endl;
-            }
-            else {
-                v.eliminar(pos);
-            }
+            Civilizacion c;
+            string civi;
+            cout << endl << "Que civilizacion desea eliminar?" << endl;
+            getline(cin, civi);
+            c.setNombre(civi);
+            v.eliminar(civi);
+            cout << "Eliminando..." << endl;
+            cout << endl << "Presione entrar para continuar..." << endl;
+            cin.get();
         }
         
         else if (op == "9") {
             Civilizacion c;
-            cin >> c; cin.ignore();
+            string civi;
+            cout << endl << "Que civilizacion desea Buscar?" << endl;
+            getline(cin, civi);
+            c.setNombre(civi);
 
             Civilizacion *ptr = v.buscar(c);
 
@@ -139,13 +158,17 @@ int main() {
                 cout << "Se encontro lo siguiente: " << endl;
                 cout << *ptr << endl;
             }
+            cout << endl << "Presione entrar para continuar..." << endl;
+            cin.get();
         }
        
         else if(op == "10"){
             Civilizacion c;
+            string civi;
             cout << endl << "Que civilizacion desea Modificar?" << endl;
-           
-            cin >> c; cin.ignore();
+            getline(cin, civi);
+            c.setNombre(civi);
+            //cin >> c; cin.ignore();
 
             Civilizacion *ptr = v.buscar(c);
 
@@ -153,30 +176,93 @@ int main() {
                 cout << "no encontrado" << endl;
             }
             else {
-                cout << "Se encontro coincidencias con: " << endl;
-                cout << *ptr << endl;
+                cout << endl << "Se encontro coincidencias con: " << endl;
+                //cout << *ptr << endl;
                 
             }
+            int modA;
+            string nombre;
+            float ubix;
+            float ubiy;
+            int puntuacion;
             
-            cout << "Modificar: " << endl;
-          
-            cin >> c;
+            if(ptr != nullptr){
+                while(true){
+                    cout << endl;
+                    cout << *ptr << endl;
 
-           
-            v.insertar(c, 0);
-            
-
+                    cout << endl << "Que atributo deseas modificar?: " << endl;
+                    cout << "1)Nombre\n2)Ubicación X\n3)Ubicacion Y\n4)Puntuacion\n5)Salir\nOpcion:" << endl;
+                    cin>>modA;
+                    if(modA == 1){
+                    cin.ignore();
+                    cout << "Dame el nuevo Nombre: ";
+                    getline(cin, nombre);//cin.ignore();
+                    ptr->setNombre(nombre);
+                    //cin.ignore();
+                    }
+                    else if(modA == 2){
+                        cout << "Dame la nueva ubicacion en X: ",
+                        cin >>ubix;cin.ignore();
+                        ptr->setubiX(ubix);
+                    }
+                    else if(modA == 3){
+                        cout << "Dame la nueva ubicacion en Y: ",
+                        cin >>ubiy;cin.ignore();
+                        ptr->setubiY(ubiy);
+                    }
+                    else if(modA == 4){
+                        cout << "Dame la nueva puntuacion: ",
+                        cin>>puntuacion;cin.ignore();
+                        ptr->setpuntuacion(puntuacion);
+                    }
+                    else if(modA == 5){
+                        break;
+                    }
+                    else{
+                        cout << endl << "Opcion no valida." << endl;
+                    }
+                }
+                cout << endl << "Presione entrar para continuar..." << endl;
+                cin.get();
+            }
+            else{
+                cout << "No encontrado" << endl;
+            }        
         }
 
         else if (op == "11") {
-            if(v.empty()){
+            int op11;
+            cout << endl << "Que desea ver?\n1)Usuario.\n2)Civilizaciones\nOpcion: ";
+            cin>>op11;
+            cout << endl;
+            if(op11==1){
+                cin.ignore();
+                if(v.emptyU()){
+                cout << endl << "No se ha registrado ningun usuario" << endl << endl;
+                }
+                else{
+                    v.mostrarUsuario();
+                    cout << endl << "Presione entrar para continuar..." << endl;
+                    cin.get();
+                }
+            }
+            else if(op11==2){
+                cin.ignore();
+                if(v.empty()){
                 cout << endl << "No se han registrado Civilizaciones." << endl << endl;
+                }
+                else{
+                    //v.mostrarUsuario();
+                    v.mostrar();
+                    cout << endl << "El total de civilizaciones registradas es: " << endl;
+                    cout << v.size() << endl << endl;
+                    cout << endl << "Presione entrar para continuar..." << endl;
+                    cin.get();
+                }
             }
             else{
-                v.mostrarUsuario();
-                v.mostrar();
-                cout << endl << "El total de civilizaciones registradas es: " << endl;
-                cout << v.size() << endl << endl;
+                cout << "Opcion no valida." << endl;
             }
             
         }
@@ -188,6 +274,8 @@ int main() {
                 cout << "El total de civilizaciones registradas es: " << endl;
                 cout << v.size() << endl << endl;
             } 
+            cout << endl << "Presione entrar para continuar..." << endl;
+            cin.get();
         }
 
         else if(op == "13"){
